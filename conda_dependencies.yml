@@ -1,0 +1,13 @@
+name: azureml-training
+channels:
+  - anaconda
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip:
+      - 'azureml-dataset-runtime[pandas,fuse]'
+      - azureml-defaults
+      - numpy
+      - scikit-learn
+      - tensorflow
+      - opencv-python-headless
