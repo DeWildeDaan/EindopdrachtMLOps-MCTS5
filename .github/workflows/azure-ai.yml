@@ -112,7 +112,7 @@ jobs:
     # needs: [dependencies] # Wait until this job was finished.
     if: ${{ inputs.data_prep }}
     # The type of runner that the job will run on
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     env:
       DATA_FOLDER: data
@@ -148,7 +148,7 @@ jobs:
         (needs.data-preparing.result == 'success' || needs.data-preparing.result == 'skipped') &&
         inputs.ai_training
       }}
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     env:
       INITIAL_LEARNING_RATE: 0.01
@@ -198,7 +198,7 @@ jobs:
         (needs.ai-training.result == 'success' || needs.ai-training.result == 'skipped') &&
         inputs.api_creation
       }}
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     env:
       DEPLOYMENT_DEPENDENCIES: deployment_environment.yml
@@ -239,7 +239,7 @@ jobs:
         (needs.api-creation.result == 'success' || needs.api-creation.result == 'skipped') &&
         inputs.local_deployment
       }}
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download docker-config artifact
