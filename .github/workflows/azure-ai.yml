@@ -216,6 +216,7 @@ jobs:
       SCORE_SERVICE_NAME: malaria-classification-svc
       LOCAL_MODEL_PATH: api/outputs
       LOCAL_DEPLOYMENT: ${{ inputs.local_deployment }}
+      AZURE_DEPLOYMENT: ${{ inputs.azure_deployment }}
 
     steps:
       - uses: actions/checkout@v2
@@ -230,7 +231,6 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 'Run deployment script'
-        if: inputs.azure_deployment
         id: deployment
         run: |
           python steps/03_Deployment.py

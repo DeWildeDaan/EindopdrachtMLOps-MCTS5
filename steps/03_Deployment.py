@@ -15,6 +15,7 @@ load_dotenv()
 CLASSES = os.environ.get('CLASSES').split(',')
 MODEL_NAME = os.environ.get('MODEL_NAME')
 LOCAL_DEPLOYMENT = os.environ.get('LOCAL_DEPLOYMENT')
+AZURE_DEPLOYMENT = os.environ.get('AZURE_DEPLOYMENT')
 print(LOCAL_DEPLOYMENT)
 print(type(LOCAL_DEPLOYMENT))
 
@@ -64,9 +65,13 @@ def main():
 
     print(os.environ)
 
-    environment = prepareEnv(ws)
-    service = prepareDeployment(ws, environment)
-    service.wait_for_deployment(show_output=True)
+    downloadLatestModel(ws)
+
+    if(AZURE_DEPLOYMENT == True):
+        print('Deploying model to Azure:')
+        environment = prepareEnv(ws)
+        service = prepareDeployment(ws, environment)
+        service.wait_for_deployment(show_output=True)
 
 
 if __name__ == '__main__':
