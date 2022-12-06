@@ -28,7 +28,7 @@ TRAIN_TEST_SPLIT_FACTOR = float(os.environ.get('TRAIN_TEST_SPLIT_FACTOR'))
 def processAndUploadImages(datasets, data_path, processed_path, ws, class_name):
 
     # We can't use mount on these machines, so we'll have to download them
-    
+
     image_path = os.path.join(data_path, 'classes', class_name)
     print(f"Trying to download {class_name} to {image_path} ...")
     # Get the dataset name for this animal, then download to the directory
@@ -77,11 +77,12 @@ def processAndUploadImages(datasets, data_path, processed_path, ws, class_name):
     emptyDirectory(image_path)
     print(f'... done with the original images ...')
     emptyDirectory(os.path.join(processed_path, class_name))
-    print(f'... done with the processed images. On to the next Animal, if there are still!')
+    print(f'... done with the processed images.')
 
 
 def emptyDirectory(directory_path):
-    shutil.rmtree(directory_path)
+    if os.path.exists(directory_path) and os.path.isdir(directory_path):
+        shutil.rmtree(directory_path)
 
 
 def prepareDataset(ws):
@@ -100,7 +101,7 @@ def prepareDataset(ws):
 
     # Make sure to give our workspace with it
     datasets = Dataset.get_all(workspace=ws)
-    print(f"Available datasets:",datasets)
+    print(f"Available datasets:", datasets)
     for class_name in CLASSES:
         processAndUploadImages(
             datasets, data_folder, processed_path, ws, class_name)
