@@ -2,7 +2,7 @@ import argparse
 import os
 from glob import glob
 import random
-import numpy as np
+#import numpy as np
 
 # This time we will need our Tensorflow Keras libraries, as we will be working with the AI training now
 from tensorflow import keras
