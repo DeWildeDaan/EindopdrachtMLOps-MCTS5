@@ -40,6 +40,11 @@ on:
       local_deployment:
         description: 'Check if we should deploy the API locally later on.'
         type: boolean
+        default: true
+        required: true
+      azure_deployment:
+        description: 'Check if we should deploy the API on Azure later on.'
+        type: boolean
         default: false
         required: true
 
@@ -78,6 +83,11 @@ on:
         required: true
       local_deployment:
         description: 'Check if we should deploy the API locally later on.'
+        type: boolean
+        default: true
+        required: true
+      azure_deployment:
+        description: 'Check if we should deploy the API on Azure later on.'
         type: boolean
         default: false
         required: true
@@ -220,6 +230,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 'Run deployment script'
+        if: inputs.azure_deployment
         id: deployment
         run: |
           python steps/03_Deployment.py
