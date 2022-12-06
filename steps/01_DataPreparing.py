@@ -100,6 +100,7 @@ def prepareDataset(ws):
 
     # Make sure to give our workspace with it
     datasets = Dataset.get_all(workspace=ws)
+    print(f"Available datasets:",datasets)
     for class_name in CLASSES:
         processAndUploadImages(
             datasets, data_folder, processed_path, ws, class_name)
