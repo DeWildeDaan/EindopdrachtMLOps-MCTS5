@@ -67,7 +67,7 @@ def main():
 
     downloadLatestModel(ws)
 
-    if(AZURE_DEPLOYMENT == True):
+    if(AZURE_DEPLOYMENT == 'true'):
         print('Deploying model to Azure:')
         environment = prepareEnv(ws)
         service = prepareDeployment(ws, environment)

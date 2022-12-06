@@ -23,6 +23,8 @@ CLASSES = os.environ.get('CLASSES').split(',')
 SEED = int(os.environ.get('RANDOM_SEED'))
 IMAGE_SIZE = int(os.environ.get('IMAGE_SIZE'))
 TRAIN_TEST_SPLIT_FACTOR = float(os.environ.get('TRAIN_TEST_SPLIT_FACTOR'))
+PROCESS_IMAGES = os.environ.get('PROCESS_IMAGES')
+SPLIT_IMAGES = os.environ.get('SPLIT_IMAGES')
 
 
 def processAndUploadImages(datasets, data_path, processed_path, ws, class_name):
@@ -177,12 +179,12 @@ def trainTestSplitData(ws):
 
 def main():
     ws = connectWithAzure()
-
-    print('Processing the images')
-    prepareDataset(ws)
-
-    print('Splitting the images')
-    trainTestSplitData(ws)
+    if PROCESS_IMAGES == 'true':
+        print('Processing the images')
+        prepareDataset(ws)
+    if SPLIT_IMAGES == 'true':
+        print('Splitting the images')
+        trainTestSplitData(ws)
 
 
 if __name__ == '__main__':
