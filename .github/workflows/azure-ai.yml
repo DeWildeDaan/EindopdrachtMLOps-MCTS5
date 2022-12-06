@@ -86,9 +86,9 @@ on:
 env:
   CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
 
-  CLIENT_ID: 71f20d4c-af8a-497f-8df3-b8f6f42dd5a4 # Change this !
+  CLIENT_ID: 58e2ae8d-58fd-474f-8206-bbbe312f1aef # Change this !
   TENANT_ID: 4ded4bb1-6bff-42b3-aed7-6a36a503bf7a # Change this !
-  WORKSPACE_NAME: eindopracht# Change this !
+  WORKSPACE_NAME: eindopracht # Change this !
   RESOURCE_GROUP: mlops-eindopdracht # Change this !
   SUBSCRIPTION_ID: 71f20d4c-af8a-497f-8df3-b8f6f42dd5a4 # Change this !
 
