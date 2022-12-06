@@ -28,9 +28,9 @@ TRAIN_TEST_SPLIT_FACTOR = float(os.environ.get('TRAIN_TEST_SPLIT_FACTOR'))
 def processAndUploadImages(datasets, data_path, processed_path, ws, class_name):
 
     # We can't use mount on these machines, so we'll have to download them
-
+    
     image_path = os.path.join(data_path, 'classes', class_name)
-
+    print(f"Trying to download {class_name} to {image_path} ...")
     # Get the dataset name for this animal, then download to the directory
     # Overwriting means we don't have to delete if they already exist, in case something goes wrong.
     datasets[class_name].download(image_path, overwrite=True)
