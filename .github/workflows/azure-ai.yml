@@ -183,7 +183,7 @@ jobs:
       - name: 'install requirements'
         run: pip install -r requirements.txt
 
-      - name: 'Run data prep script'
+      - name: 'Run training script'
         id: aitraining
         run: |
           python steps/02_AITraining.py
