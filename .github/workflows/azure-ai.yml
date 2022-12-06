@@ -37,7 +37,7 @@ on:
         type: boolean
         default: false
         required: true
-      local_deployment:
+      create_docker_image:
         description: 'Check if you want to create a docker image of the API.'
         type: boolean
         default: true
@@ -81,7 +81,7 @@ on:
         type: boolean
         default: false
         required: true
-      local_deployment:
+      create_docker_image:
         description: 'Check if you want to create a docker image of the API.'
         type: boolean
         default: true
@@ -215,7 +215,6 @@ jobs:
       DEPLOYMENT_ENV_NAME: malaria-classification-env-deployment
       SCORE_SERVICE_NAME: malaria-classification-svc
       LOCAL_MODEL_PATH: api/outputs
-      LOCAL_DEPLOYMENT: ${{ inputs.local_deployment }}
       AZURE_DEPLOYMENT: ${{ inputs.azure_deployment }}
 
     steps:
@@ -236,7 +235,7 @@ jobs:
           python steps/03_Deployment.py
 
       - name: Upload API Code for Docker
-        if: inputs.local_deployment
+        if: inputs.create_docker_image
         uses: actions/upload-artifact@v2
         with:
           name: docker-config
@@ -244,11 +243,11 @@ jobs:
 
   docker-build-and-push:
     needs: [api-creation]
-    # This will run Always BUT only when the previous two jobs were successful or skipped && the local_deployment flag is set to true.
+    # This will run Always BUT only when the previous two jobs were successful or skipped && the create_docker_image flag is set to true.
     if: ${{
         always() &&
         (needs.api-creation.result == 'success' || needs.api-creation.result == 'skipped') &&
-        inputs.local_deployment
+        inputs.create_docker_image
       }}
     runs-on: ubuntu-20.04
 
@@ -288,9 +287,4 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-
-
-
-
-
 

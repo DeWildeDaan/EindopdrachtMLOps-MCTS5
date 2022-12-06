@@ -14,11 +14,7 @@ load_dotenv()
 
 CLASSES = os.environ.get('CLASSES').split(',')
 MODEL_NAME = os.environ.get('MODEL_NAME')
-LOCAL_DEPLOYMENT = os.environ.get('LOCAL_DEPLOYMENT')
 AZURE_DEPLOYMENT = os.environ.get('AZURE_DEPLOYMENT')
-print(LOCAL_DEPLOYMENT)
-print(type(LOCAL_DEPLOYMENT))
-
 
 def prepareEnv(ws):
     environment_name = os.environ.get('DEPLOYMENT_ENV_NAME')
@@ -72,7 +68,6 @@ def main():
         environment = prepareEnv(ws)
         service = prepareDeployment(ws, environment)
         service.wait_for_deployment(show_output=True)
-        print(service.get_logs())
 
 
 if __name__ == '__main__':
