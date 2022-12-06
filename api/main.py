@@ -14,9 +14,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-CLASSES = ['infected', 'uninfected']  # Animal names here
+CLASSES = ['infected', 'uninfected']
 
-model = load_model('outputs/malaria-classification') # Model_name here!
+model = load_model('outputs/malaria-cnn') # Model_name here!
 
 @app.post('/upload/image')
 async def uploadImage(img: UploadFile = File(...)):
