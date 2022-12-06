@@ -33,17 +33,17 @@ on:
         default: true
         required: true
       train_on_local:
-        description: 'Should we train the AI model on the runner? Otherwise we train on Azure cloud machine'
+        description: 'Check if you want to train on the runnder. Otherwise we train on Azure cloud machine'
         type: boolean
         default: false
         required: true
       local_deployment:
-        description: 'Check if we should deploy the API locally later on.'
+        description: 'Check if you want to create a docker image of the API.'
         type: boolean
         default: true
         required: true
       azure_deployment:
-        description: 'Check if we should deploy the API on Azure later on.'
+        description: 'Check if we should deploy the API on Azure.'
         type: boolean
         default: false
         required: true
@@ -77,17 +77,17 @@ on:
         default: true
         required: true
       train_on_local:
-        description: 'Should we train the AI model on the runner? Otherwise we train on Azure cloud machine'
+        description: 'Check if you want to train on the runnder. Otherwise we train on Azure cloud machine'
         type: boolean
         default: false
         required: true
       local_deployment:
-        description: 'Check if we should deploy the API locally later on.'
+        description: 'Check if you want to create a docker image of the API.'
         type: boolean
         default: true
         required: true
       azure_deployment:
-        description: 'Check if we should deploy the API on Azure later on.'
+        description: 'Check if we should deploy the API on Azure.'
         type: boolean
         default: false
         required: true

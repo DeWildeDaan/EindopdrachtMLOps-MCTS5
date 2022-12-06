@@ -71,7 +71,8 @@ def main():
         print('Deploying model to Azure:')
         environment = prepareEnv(ws)
         service = prepareDeployment(ws, environment)
-        service.wait_for_deployment(show_output=True)
+        print(service.get_logs())
+        #service.wait_for_deployment(show_output=True)
 
 
 if __name__ == '__main__':
