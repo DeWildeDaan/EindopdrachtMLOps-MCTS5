@@ -23,17 +23,17 @@ on:
         default: true
         required: true
       process_images:
-        description: 'Check to skip the processing of the original Data images'
+        description: 'Check to process the original data.'
         type: boolean
         default: true
         required: true
       split_images:
-        description: 'Check to skip the Splitting of the Training and Testiing sets'
+        description: 'Check to split the data into a test- and training-set.'
         type: boolean
         default: true
         required: true
       train_on_local:
-        description: 'Check if you want to train on the runnder. Otherwise we train on Azure cloud machine'
+        description: 'Check if you want to train on the runner. Otherwise we train on Azure cloud machine'
         type: boolean
         default: false
         required: true
@@ -72,12 +72,12 @@ on:
         default: true
         required: true
       process_images:
-        description: 'Check to skip the processing of the original Data images'
+        description: 'Check to process the original data.'
         type: boolean
         default: true
         required: true
       split_images:
-        description: 'Check to skip the Splitting of the Training and Testiing sets'
+        description: 'Check to split the data into a test- and training-set.'
         type: boolean
         default: true
         required: true
@@ -281,7 +281,7 @@ jobs:
           # More info: https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
           tags: |
             type=ref,event=branch
-            type=sha
+            type=sha,format=long
       
       # Enter your GITHUB Token here!
       - name: Login to GHCR

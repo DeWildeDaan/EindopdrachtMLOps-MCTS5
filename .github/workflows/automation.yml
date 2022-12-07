@@ -16,5 +16,5 @@ jobs:
       train_on_local: false
       create_docker_image: true
       azure_deployment: false
-      run_docker_image: false
+      run_docker_image: true
     secrets: inherit
