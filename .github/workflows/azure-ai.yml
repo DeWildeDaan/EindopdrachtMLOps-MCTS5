@@ -8,17 +8,7 @@ on:
   workflow_call:
     inputs:
       data_prep:
-        description: 'Data preparing'
-        type: boolean
-        default: true
-        required: true
-      ai_training:
-        description: 'AI Training'
-        type: boolean
-        required: true
-        default: true
-      api_creation:
-        description: 'API Creation'
+        description: '---Data preparing---'
         type: boolean
         default: true
         required: true
@@ -32,10 +22,20 @@ on:
         type: boolean
         default: true
         required: true
+      ai_training:
+        description: '---AI Training---'
+        type: boolean
+        required: true
+        default: true
       train_on_local:
         description: 'Check if you want to train on the runner. Otherwise we train on Azure cloud machine'
         type: boolean
         default: false
+        required: true
+      api_creation:
+        description: '---API Creation---'
+        type: boolean
+        default: true
         required: true
       create_docker_image:
         description: 'Check if you want to create a docker image of the API.'
@@ -47,13 +47,13 @@ on:
         type: boolean
         default: false
         required: true
-      run_docker_image:
-        description: 'Check if we should run the docker image of the API locally.'
+      remove_docker_image:
+        description: 'Check if we should remove the previous docker image of the API.'
         type: boolean
         default: false
         required: true
-      remove_docker_image:
-        description: 'Check if we should remove the docker image of the API locally.'
+      run_docker_image:
+        description: 'Check if we should run the docker image of the API locally.'
         type: boolean
         default: false
         required: true
@@ -62,20 +62,10 @@ on:
     branches: [ main, lessonsteps/** ]
     inputs:
       data_prep:
-        description: 'Data preparing'
+        description: '---Data preparing---'
         type: boolean
         required: true
         default: true
-      ai_training:
-        description: 'AI Training'
-        type: boolean
-        required: true
-        default: true
-      api_creation:
-        description: 'API Creation'
-        type: boolean
-        default: true
-        required: true
       process_images:
         description: 'Check to process the original data.'
         type: boolean
@@ -86,10 +76,20 @@ on:
         type: boolean
         default: true
         required: true
+      ai_training:
+        description: '---AI Training---'
+        type: boolean
+        required: true
+        default: true
       train_on_local:
         description: 'Check if you want to train on the runnder. Otherwise we train on Azure cloud machine'
         type: boolean
         default: false
+        required: true
+      api_creation:
+        description: '---API Creation---'
+        type: boolean
+        default: true
         required: true
       create_docker_image:
         description: 'Check if you want to create a docker image of the API.'
@@ -101,13 +101,13 @@ on:
         type: boolean
         default: false
         required: true
-      run_docker_image:
-        description: 'Check if we should run the docker image of the API locally.'
+      remove_docker_image:
+        description: 'Check if we should remove the previous docker image of the API.'
         type: boolean
         default: false
         required: true
-      remove_docker_image:
-        description: 'Check if we should remove the docker image of the API locally.'
+      run_docker_image:
+        description: 'Check if we should run the docker image of the API locally.'
         type: boolean
         default: false
         required: true
