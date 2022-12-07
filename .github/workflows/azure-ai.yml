@@ -373,12 +373,12 @@ jobs:
       - name: Deploy API based on the github SHA
         if: inputs.create_docker_image
         run: |
-          kubectl set image -f api-deployment.yml malaria-classification-api=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }} --local -o yaml | kubectl apply -f api-deployment.yml
+          kubectl set image -f kubernetis/api-deployment.yml malaria-classification-api=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }} --local -o yaml | kubectl apply -f kubernetis/api-deployment.yml
 
       - name: Deploy API based on the latest package
         if: ${{ !inputs.create_docker_image }}
         run: |
-          kubectl set image -f api-deployment.yml malaria-classification-api=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest --local -o yaml | kubectl apply -f api-deployment.yml
+          kubectl set image -f kubernetis/api-deployment.yml malaria-classification-api=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest --local -o yaml | kubectl apply -f kubernetis/api-deployment.yml
 
       - name: Expose the deployment
         run: |
