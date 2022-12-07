@@ -256,7 +256,7 @@ jobs:
     # This will run Always BUT only when the previous two jobs were successful or skipped && the create_docker_image flag is set to true.
     if: ${{
         always() &&
-        (needs.api-creation.result == 'success' || needs.api-creation.result == 'skipped') &&
+        (needs.api-creation.result == 'success') &&
         inputs.create_docker_image
       }}
     runs-on: ubuntu-20.04
@@ -274,6 +274,7 @@ jobs:
           # list of Docker images to use as base name for tags
           images: |
             ghcr.io/dewildedaan/eindopdrachtmlops-mcts5
+            ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
           # generate Docker tags based on the following events/attributes:
           # The GitHub Branch
           # The GitHub SHA
@@ -317,5 +318,5 @@ jobs:
 
       - name: Run Docker Image
         run: |
-          docker run -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:${{ github.sha }}
+          docker run -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
 
