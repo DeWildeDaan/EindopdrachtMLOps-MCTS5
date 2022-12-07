@@ -318,5 +318,5 @@ jobs:
 
       - name: Run Docker Image
         run: |
-          docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5
+          docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:${{ github.sha }}
 
