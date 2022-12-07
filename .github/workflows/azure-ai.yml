@@ -281,7 +281,6 @@ jobs:
           tags: |
             type=ref,event=branch
             type=sha
-            type='latest'
       
       # Enter your GITHUB Token here!
       - name: Login to GHCR
