@@ -317,7 +317,13 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run Docker Image
+      - name: Run Docker Image based on the SHA of the commit
+        if: inputs.create_docker_image
         run: |
           docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }}
+      
+      - name: Run Docker Image based on the latest package
+        if: ${{ !inputs.create_docker_image }}
+        run: |
+          docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
 
