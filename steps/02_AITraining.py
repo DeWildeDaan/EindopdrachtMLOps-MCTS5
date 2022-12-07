@@ -156,7 +156,7 @@ def main():
     TRAIN_ON_LOCAL = os.environ.get('TRAIN_ON_LOCAL')
 
     compute_target = None
-    if(TRAIN_ON_LOCAL != 'true'):
+    if TRAIN_ON_LOCAL == 'false':
         compute_target = prepareComputeCluster(ws)
 
     # We can also run on the local machine if we set the compute_target to None. We specify this in an ENV variable as TRAIN_ON_LOCAL.
