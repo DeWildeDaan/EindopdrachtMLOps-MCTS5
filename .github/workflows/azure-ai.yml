@@ -274,7 +274,8 @@ jobs:
           # list of Docker images to use as base name for tags
           images: |
             ghcr.io/dewildedaan/eindopdrachtmlops-mcts5
-          flavor: latest=true
+          flavor: |
+            latest=true
           # generate Docker tags based on the following events/attributes:
           # The GitHub Branch
           # The GitHub SHA
@@ -318,5 +319,5 @@ jobs:
 
       - name: Run Docker Image
         run: |
-          docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:${{ github.sha }}
+          docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }}
 
