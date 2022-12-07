@@ -47,6 +47,11 @@ on:
         type: boolean
         default: false
         required: true
+      run_docker_image:
+        description: 'Check if we should run the docker image of the API locally.'
+        type: boolean
+        default: false
+        required: true
 
   workflow_dispatch:
     branches: [ main, lessonsteps/** ]
@@ -88,6 +93,11 @@ on:
         required: true
       azure_deployment:
         description: 'Check if we should deploy the API on Azure.'
+        type: boolean
+        default: false
+        required: true
+      run_docker_image:
+        description: 'Check if we should run the docker image of the API locally.'
         type: boolean
         default: false
         required: true
@@ -287,4 +297,30 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+  
+  docker-run-local:
+    needs: [docker-build-and-push]
+    # This will run Always BUT only when the previous two jobs were successful or skipped && the create_docker_image flag is set to true.
+    if: ${{
+        always() &&
+        (needs.docker-build-and-push.result == 'success' || needs.docker-build-and-push.result == 'skipped') &&
+        inputs.run_docker_image
+      }}
+    runs-on: self-hosted
+    steps:
+      - name: Download docker-config artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: docker-config
+
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Docker Image
+        run: |
+          docker run -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
 

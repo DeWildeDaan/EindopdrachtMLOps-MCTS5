@@ -16,7 +16,8 @@ app.add_middleware(
 
 CLASSES = ['infected', 'uninfected']
 
-model = load_model('outputs/malaria-cnn') # Model_name here!
+model = load_model('outputs/malaria-cnn/saved_model.pb')
+
 
 @app.post('/upload/image')
 async def uploadImage(img: UploadFile = File(...)):
