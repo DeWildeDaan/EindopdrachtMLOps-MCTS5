@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: malaria-classification-api-dpl
   labels:
-    app: malaria-classification-api-dpl
+    app: malaria-classification-api
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: malaria-classification-api-dpl
+      app: malaria-classification-api
   template:
     metadata:
       labels:
-        app: malaria-classification-api-dpl
+        app: malaria-classification-api
     spec:
       containers:
-      - name: malaria-classification-api-dpl
+      - name: malaria-classification-api
         image: ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
         ports:
         - containerPort: 80
