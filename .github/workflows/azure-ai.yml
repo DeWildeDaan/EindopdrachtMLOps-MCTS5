@@ -273,15 +273,15 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:${{ github.sha }}
-            ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
+            ghcr.io/dewildedaan/eindopdrachtmlops-mcts5
+          flavor: latest=true
           # generate Docker tags based on the following events/attributes:
           # The GitHub Branch
           # The GitHub SHA
           # More info: https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
-          # tags: |
-          #   type=ref,event=branch
-          #   type=sha
+          tags: |
+            type=ref,event=branch
+            type=sha
       
       # Enter your GITHUB Token here!
       - name: Login to GHCR
@@ -318,5 +318,5 @@ jobs:
 
       - name: Run Docker Image
         run: |
-          docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:${{ github.sha }}
+          docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5
 
