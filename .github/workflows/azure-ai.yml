@@ -357,25 +357,33 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Remove old container
+      - name: Create namespace
+        run: |
+          kubectl create namespace eindopdracht-mlops --dry-run=client
+      
+      - name: Set current namespace
+        run: |
+          kubectl config set-context --current --namespace=eindopdracht-mlops
+
+      - name: Remove old deployment
         if: inputs.remove_docker_image
         run: |
-          kubectl delete deployment malaria-classification
+          kubectl delete deployment malaria-classification-api
 
-      - name: Run Docker Image based on the SHA of the commit
+      - name: Deploy API based on the github SHA
         if: inputs.create_docker_image
         run: |
-          kubectl run malaria-classification --image=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }} --port=80
+          kubectl set image -f api-deployment.yml malaria-classification-api=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }} --local -o yaml | kubectl apply -f api-deployment.yml
 
-      - name: Run Docker Image based on the latest package
+      - name: Deploy API based on the latest package
         if: ${{ !inputs.create_docker_image }}
         run: |
-          kubectl run malaria-classification --image=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest --port=80
+          kubectl set image -f api-deployment.yml malaria-classification-api=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest --local -o yaml | kubectl apply -f api-deployment.yml
 
-      - name: Expose the container
+      - name: Expose the deployment
         run: |
-          kubectl expose deployment malaria-classification --type=LoadBalancer --port=80 --target-port=80
+          kubectl expose deployment malaria-classification-api --type=LoadBalancer --port=80 --target-port=80
 
       - name: Get the IP address
         run: |
-          kubectl get service malaria-classification
+          kubectl get service malaria-classification-api
