@@ -52,6 +52,11 @@ on:
         type: boolean
         default: false
         required: true
+      remove_docker_image:
+        description: 'Check if we should remove the docker image of the API locally.'
+        type: boolean
+        default: false
+        required: true
 
   workflow_dispatch:
     branches: [ main, lessonsteps/** ]
@@ -98,6 +103,11 @@ on:
         required: true
       run_docker_image:
         description: 'Check if we should run the docker image of the API locally.'
+        type: boolean
+        default: false
+        required: true
+      remove_docker_image:
+        description: 'Check if we should remove the docker image of the API locally.'
         type: boolean
         default: false
         required: true
@@ -316,6 +326,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove old container
+        if: inputs.remove_old_container
+        run: |
+          docker rm -f malaria-classification || true
 
       - name: Run Docker Image based on the SHA of the commit
         if: inputs.create_docker_image
