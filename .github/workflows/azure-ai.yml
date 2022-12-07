@@ -328,7 +328,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Remove old container
-        if: inputs.remove_old_container
+        if: inputs.remove_docker_image
         run: |
           docker rm -f malaria-classification || true
 
