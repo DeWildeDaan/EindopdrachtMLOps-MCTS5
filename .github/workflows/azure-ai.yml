@@ -315,14 +315,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Stop existing container
-        run: |
-          docker stop malaria-classification
-      
-      - name: Remove existing container
-        run: |
-          docker rm malaria-classification
-
       - name: Run Docker Image
         run: |
           docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:${{ github.sha }}
