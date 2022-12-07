@@ -317,5 +317,5 @@ jobs:
 
       - name: Run Docker Image
         run: |
-          docker run -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
+          docker run -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:${{ github.sha }}
 
