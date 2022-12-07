@@ -43,7 +43,7 @@ on:
         default: false
         required: true
       remove_deployment:
-        description: 'Check if we should remove the previous docker/kubernetis deployment of the API LOCALLY.'
+        description: 'Check if we should remove/update the previous docker/kubernetis deployment of the API LOCALLY. (if this is not the first deployment)'
         type: boolean
         default: false
         required: true
@@ -97,7 +97,7 @@ on:
         default: false
         required: true
       remove_deployment:
-        description: 'Check if we should remove the previous docker/kubernetis deployment of the API LOCALLY.'
+        description: 'Check if we should remove/update the previous docker/kubernetis deployment of the API LOCALLY. (if this is not the first deployment)'
         type: boolean
         default: false
         required: true
@@ -365,6 +365,7 @@ jobs:
           kubectl delete deployment malaria-classification-api-dpl | kubectl delete service malaria-classification-api-svc | kubectl delete namespace eindopdracht-mlops
 
       - name: Create namespace
+        if: inputs.remove_deployment
         run: |
           kubectl create namespace eindopdracht-mlops
       
@@ -388,8 +389,39 @@ jobs:
 
       - name: Expose the deployment
         run: |
-          kubectl expose deployment malaria-classification-api-svc --type=LoadBalancer --port=80 --target-port=80
+          kubectl expose deployment malaria-classification-api-dpl --type=LoadBalancer --port=80 --target-port=80
 
       - name: Get the IP address
         run: |
           kubectl get service malaria-classification-api-dpl
+
+      
+
+
+      # - name: Create namespace
+      #   if: ${{ !inputs.remove_deployment }}
+      #   run: |
+      #     kubectl create namespace eindopdracht-mlops
+      
+      # - name: Set current namespace
+      #   run: |
+      #     kubectl config set-context --current --namespace=eindopdracht-mlops
+
+      # - name: Deploy API
+      #   if: ${{ !inputs.remove_deployment }}
+      #   run: |
+      #     kubectl apply -f kubernetis/api-deployment.yml
+      
+      # - name: Set image based on the github SHA
+      #   if: inputs.create_docker_image
+      #   run: |
+      #     kubectl set image -f kubernetis/api-deployment.yml malaria-classification-api-dpl=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }} --local -o yaml
+
+      # - name: Expose the deployment
+      #   if: ${{ !inputs.remove_deployment }}
+      #   run: |
+      #     kubectl expose deployment malaria-classification-api-dpl --type=LoadBalancer --port=80 --target-port=80
+
+      # - name: Get the IP address
+      #   run: |
+      #     kubectl get service malaria-classification-api-dpl

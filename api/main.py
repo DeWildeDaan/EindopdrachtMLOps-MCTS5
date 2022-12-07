@@ -19,9 +19,11 @@ CLASSES = ['infected', 'uninfected']
 
 model = load_model('outputs/malaria-cnn')
 
+
 @app.get("/")
 async def root():
-    return {"message": f"Alive at {datetime.now()}"}
+    return {"message": f"Alive at {datetime.now()}, this is a test"}
+
 
 @app.post('/upload/image')
 async def uploadImage(img: UploadFile = File(...)):
