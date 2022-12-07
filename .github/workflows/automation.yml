@@ -12,10 +12,10 @@ jobs:
       process_images: false
       ai_training: false
       train_on_local: false
-      api_creation: false
-      create_docker_image: false
+      api_creation: true
+      create_docker_image: true
       azure_deployment: false
-      remove_docker_image: false
+      remove_deployment: true
       docker_deployment: false
       kubernetis_deployment: true
     secrets: inherit
