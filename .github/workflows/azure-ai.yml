@@ -17,11 +17,6 @@ on:
         type: boolean
         default: true
         required: true
-      split_images:
-        description: 'Check to split the data into a test- and training-set.'
-        type: boolean
-        default: true
-        required: true
       ai_training:
         description: '---AI Training---'
         type: boolean
@@ -73,11 +68,6 @@ on:
         default: true
       process_images:
         description: 'Check to process the original data.'
-        type: boolean
-        default: true
-        required: true
-      split_images:
-        description: 'Check to split the data into a test- and training-set.'
         type: boolean
         default: true
         required: true
@@ -159,7 +149,6 @@ jobs:
       DATASET_VERSION: 'latest'
       TRAIN_TEST_SPLIT_FACTOR: 0.20
       PROCESS_IMAGES: ${{ inputs.process_images }} # Make the pipeline skip processing the images
-      SPLIT_IMAGES: ${{ inputs.skip_images }} # Make the pipeline skip splitting the images
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

@@ -10,7 +10,6 @@ jobs:
     with:
       data_prep: false
       process_images: false
-      split_images: false
       ai_training: false
       train_on_local: false
       api_creation: false
