@@ -330,7 +330,7 @@ jobs:
       - name: Remove old container
         if: inputs.remove_docker_image
         run: |
-          docker rm -f malaria-classification || true
+          docker rm -f malaria-classification
 
       - name: Run Docker Image based on the SHA of the commit
         if: inputs.create_docker_image
