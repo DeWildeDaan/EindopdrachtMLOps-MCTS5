@@ -17,5 +17,5 @@ jobs:
       azure_deployment: false
       remove_deployment: false
       docker_deployment: false
-      kubernetis_deployment: true
+      kubernetis_deployment: false
     secrets: inherit
