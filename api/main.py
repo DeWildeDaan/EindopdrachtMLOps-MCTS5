@@ -4,6 +4,7 @@ from tensorflow import keras
 from tensorflow.keras.models import load_model
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
 
 app = FastAPI()
 app.add_middleware(
@@ -18,6 +19,9 @@ CLASSES = ['infected', 'uninfected']
 
 model = load_model('outputs/malaria-cnn')
 
+@app.get("/")
+async def root():
+    return {"message": f"Alive at {datetime.now()}"}
 
 @app.post('/upload/image')
 async def uploadImage(img: UploadFile = File(...)):

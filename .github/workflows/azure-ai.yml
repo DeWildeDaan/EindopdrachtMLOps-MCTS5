@@ -48,12 +48,17 @@ on:
         default: false
         required: true
       remove_docker_image:
-        description: 'Check if we should remove the previous docker image of the API LOCALLY.'
+        description: 'Check if we should remove the previous image of the API LOCALLY.'
         type: boolean
         default: false
         required: true
-      run_docker_image:
+      docker_deployment:
         description: 'Check if we should run the docker image of the API LOCALLY.'
+        type: boolean
+        default: false
+        required: true
+      kubernetis_deployment:
+        description: 'Check if we should deploy the API on KUBERNETIS.'
         type: boolean
         default: false
         required: true
@@ -102,12 +107,17 @@ on:
         default: false
         required: true
       remove_docker_image:
-        description: 'Check if we should remove the previous docker image of the API LOCALLY.'
+        description: 'Check if we should remove the previous image of the API LOCALLY.'
         type: boolean
         default: false
         required: true
-      run_docker_image:
+      docker_deployment:
         description: 'Check if we should run the docker image of the API LOCALLY.'
+        type: boolean
+        default: false
+        required: true
+      kubernetis_deployment:
+        description: 'Check if we should deploy the API on KUBERNETIS.'
         type: boolean
         default: false
         required: true
@@ -310,13 +320,13 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
   
-  docker-run-local:
+  docker-deployment:
     needs: [docker-build-and-push]
     # This will run Always BUT only when the previous two jobs were successful or skipped && the create_docker_image flag is set to true.
     if: ${{
         always() &&
         (needs.docker-build-and-push.result == 'success' || needs.docker-build-and-push.result == 'skipped') &&
-        inputs.run_docker_image
+        inputs.docker_deployment
       }}
     runs-on: self-hosted
     steps:
@@ -342,3 +352,41 @@ jobs:
         run: |
           docker run -d --name malaria-classification -p 80:80 ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
 
+  kubernetis-deployment:
+    needs: [docker-build-and-push]
+    if: ${{
+        always() &&
+        (needs.docker-build-and-push.result == 'success' || needs.docker-build-and-push.result == 'skipped') &&
+        inputs.kubernetis_deployment
+      }}
+    runs-on: self-hosted
+    steps:
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove old container
+        if: inputs.remove_docker_image
+        run: |
+          kubectl delete deployment malaria-classification
+
+      - name: Run Docker Image based on the SHA of the commit
+        if: inputs.create_docker_image
+        run: |
+          kubectl run malaria-classification --image=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }} --port=80
+
+      - name: Run Docker Image based on the latest package
+        if: ${{ !inputs.create_docker_image }}
+        run: |
+          kubectl run malaria-classification --image=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest --port=80
+
+      - name: Expose the container
+        run: |
+          kubectl expose deployment malaria-classification --type=LoadBalancer --port=80 --target-port=80
+
+      - name: Get the IP address
+        run: |
+          kubectl get service malaria-classification
