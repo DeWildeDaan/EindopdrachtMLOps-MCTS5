@@ -168,7 +168,7 @@ history = model.fit(X_train, y_train,
                     steps_per_epoch=len(X_train) // BATCH_SIZE,
                     epochs=MAX_EPOCHS,
                     callbacks=[
-                        LogToAzure(),
+                        LogToAzure(run),
                         cb_save_best_model,
                         cb_early_stop,
                         cb_reduce_lr_on_plateau
