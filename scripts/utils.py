@@ -9,7 +9,7 @@ from typing import List
 
 
 def getTargets(filepaths: List[str]) -> List[str]:
-    labels = [fp.split('/')[-1].split('_')[0]
+    labels = [fp.split('/')[-1].split('_')[1]
               for fp in filepaths]  # Get only the animal name
 
     return labels
