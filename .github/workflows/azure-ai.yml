@@ -118,9 +118,9 @@ env:
 
   CLIENT_ID: 58e2ae8d-58fd-474f-8206-bbbe312f1aef # Change this !
   TENANT_ID: 4ded4bb1-6bff-42b3-aed7-6a36a503bf7a # Change this !
-  WORKSPACE_NAME: eindopracht # Change this !
-  RESOURCE_GROUP: mlops-eindopdracht # Change this !
-  SUBSCRIPTION_ID: 71f20d4c-af8a-497f-8df3-b8f6f42dd5a4 # Change this !
+  WORKSPACE_NAME: amldaandewilde # Change this !
+  RESOURCE_GROUP: NathanReserve # Change this !
+  SUBSCRIPTION_ID: 7c50f9c3-289b-4ae0-a075-08784b3b9042 # Change this !
 
   CLASSES: infected,uninfected
   TRAIN_SET_NAME: training-set
@@ -133,6 +133,7 @@ env:
   IMAGE_SIZE: 100 # Image size that should be same for all the steps
 
   GIT_SHA: ${{ github.sha }} # Set the SHA to use in the code
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -216,7 +217,6 @@ jobs:
         id: aitraining
         run: |
           python steps/02_AITraining.py
-
 
   api-creation:
     needs: [data-preparing, ai-training]
