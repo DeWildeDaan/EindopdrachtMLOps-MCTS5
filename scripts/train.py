@@ -71,6 +71,9 @@ testing_paths = glob(os.path.join('./data/test', '**',
 print("Training samples:", len(training_paths))
 print("Testing samples:", len(testing_paths))
 
+print(training_paths[:3])  # Examples")
+print(testing_paths[:3])  # Examples")
+
 # Make sure to shuffle in the same way as I'm doing everything
 random.seed(SEED)
 random.shuffle(training_paths)
@@ -92,6 +95,9 @@ print(X_train.shape)
 print(X_test.shape)
 print(len(y_train))
 print(len(y_test))
+
+print('Examples:' + str(y_test[0]))
+print('Examples:' + str(y_train[0]))
 
 # Make sure the data is one-hot-encoded
 LABELS, y_train, y_test = encodeLabels(y_train, y_test)

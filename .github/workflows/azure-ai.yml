@@ -363,7 +363,7 @@ jobs:
       #   if: inputs.remove_deployment
       #   run: |
       #     kubectl delete deployment malaria-classification-api-dpl | kubectl delete service malaria-classification-api-dpl | kubectl delete namespace eindopdracht-mlops
-      
+
       - name: Create namespace
         if: ${{ !inputs.remove_deployment }}
         run: |
@@ -380,6 +380,7 @@ jobs:
       # - name: Set image based on the github SHA
       #   if: inputs.create_docker_image
       #   run: |
+      #     kubectl rollout restart
       #     kubectl set image -f kubernetis/api-deployment.yml malaria-classification-api-dpl=ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }} --local -o yaml
 
       - name: Expose the deployment
