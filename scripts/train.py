@@ -153,6 +153,7 @@ class LogToAzure(keras.callbacks.Callback):
         for k, v in logs.items():
             self.run.log(k, v)
 
+
 class LogRunMetrics(keras.callbacks.Callback):
     # callback at the end of every epoch
     def on_epoch_end(self, epoch, log):
@@ -160,13 +161,13 @@ class LogRunMetrics(keras.callbacks.Callback):
         run.log("Loss", log["loss"])
         run.log("Accuracy", log["accuracy"])
 
+
 # train the network
 history = model.fit(X_train, y_train,
                     validation_data=(X_test, y_test),
                     steps_per_epoch=len(X_train) // BATCH_SIZE,
                     epochs=MAX_EPOCHS,
                     callbacks=[
-                        LogRunMetrics(),  # Thanks to Patrik De Boe!
                         cb_save_best_model,
                         cb_early_stop,
                         cb_reduce_lr_on_plateau
