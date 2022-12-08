@@ -385,7 +385,7 @@ jobs:
       - name: Set image based on the github SHA
         if: inputs.create_docker_image
         run: |
-          kubectl rollout restart
+          kubectl rollout restart deployment malaria-classification-api-dpl
 
       - name: Expose the deployment
         if: ${{ !inputs.create_docker_image }}
