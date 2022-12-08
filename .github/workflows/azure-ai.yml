@@ -369,13 +369,13 @@ jobs:
         run: |
           kubectl create namespace eindopdracht-mlops
       
-      - name: Pull docker image
-        run: |
-          docker pull ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
-
       - name: Set current namespace
         run: |
           kubectl config set-context --current --namespace=eindopdracht-mlops
+      
+      - name: Pull docker image
+        run: |
+          docker pull ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
 
       - name: Deploy API
         if: ${{ !inputs.remove_deployment }}
