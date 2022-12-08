@@ -17,7 +17,7 @@ spec:
       containers:
       - name: malaria-classification-api
         image: ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
-      imagePullPolicy: Always
       restartPolicy: Never
