@@ -40,7 +40,7 @@ COMPUTE_MIN_NODES = int(os.environ.get("AML_COMPUTE_CLUSTER_MIN_NODES", 0))
 COMPUTE_MAX_NODES = int(os.environ.get("AML_COMPUTE_CLUSTER_MAX_NODES", 4))
 
 # This example uses CPU VM. For using GPU VM, set SKU to STANDARD_NC6
-VM_SIZE = os.environ.get("AML_COMPUTE_CLUSTER_SKU", "STANDARD_D2_V2")
+VM_SIZE = os.environ.get("AML_COMPUTE_CLUSTER_SKU", "Standard_D12_v2")
 
 
 def prepareComputeCluster(ws):
@@ -89,8 +89,7 @@ def prepareEnvironment(ws):
     #                                            file_path=conda_dependencies_path)
 
     # False when training on local machine, otherwise True.
-    # env.python.user_managed_dependencies = os.environ.get(
-    #     'TRAIN_ON_LOCAL') != 'true'
+    env.python.user_managed_dependencies = True
     # Register environment to re-use later
     env.register(workspace=ws)
 

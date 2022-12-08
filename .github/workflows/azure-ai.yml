@@ -363,7 +363,7 @@ jobs:
       #   if: inputs.remove_deployment
       #   run: |
       #     kubectl delete deployment malaria-classification-api-dpl | kubectl delete service malaria-classification-api-dpl | kubectl delete namespace eindopdracht-mlops
-
+      
       - name: Create namespace
         if: ${{ !inputs.remove_deployment }}
         run: |
