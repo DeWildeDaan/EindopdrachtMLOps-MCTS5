@@ -172,7 +172,7 @@ def main():
 
     run = exp.submit(config=config)
     # We aren't going to show the training output, you can follow that on the Azure logs if you want to.
-    #run.wait_for_completion(show_output=True)
+    run.wait_for_completion(show_output=True)
     print(f"Run {run.id} has finished.")
 
     downloadAndRegisterModel(ws, run)
