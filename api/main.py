@@ -22,7 +22,7 @@ model = load_model('outputs/malaria-cnn')
 
 @app.get("/")
 async def root():
-    return {"message": f"Alive at {datetime.now()}, this is a test"}
+    return {"message": f"Alive at {datetime.now()}"}
 
 
 @app.post('/upload/image')
