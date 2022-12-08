@@ -371,7 +371,7 @@ jobs:
       
       - name: Pull docker image
         run: |
-          docker pull ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:sha-${{ github.sha }}
+          docker pull ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
 
       - name: Set current namespace
         run: |

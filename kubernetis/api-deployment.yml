@@ -19,4 +19,5 @@ spec:
         image: ghcr.io/dewildedaan/eindopdrachtmlops-mcts5:latest
         ports:
         - containerPort: 80
-      restartPolicy: Always
+      imagePullPolicy: Always
+      restartPolicy: Never
