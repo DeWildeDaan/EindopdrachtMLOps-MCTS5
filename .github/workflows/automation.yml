@@ -15,7 +15,7 @@ jobs:
       api_creation: false
       create_docker_image: false
       azure_deployment: false
-      remove_deployment: false
+      remove_deployment: true
       docker_deployment: false
       kubernetis_deployment: true
     secrets: inherit
