@@ -189,10 +189,10 @@ jobs:
       EXPERIMENT_NAME: Malaria-Classification
 
       ## Compute cluster parts
-      AML_COMPUTE_CLUSTER_NAME: daandw-cpu-cluster
+      AML_COMPUTE_CLUSTER_NAME: daan-cpu-cluster
       AML_COMPUTE_CLUSTER_MIN_NODES: 1
       AML_COMPUTE_CLISTER_MAX_NODES: 4
-      AML_COMPUTE_CLUSTER_SKU: Standard_D12_v2
+      AML_COMPUTE_CLUSTER_SKU: STANDARD_D2_V2
 
       TRAIN_ON_LOCAL: ${{ inputs.train_on_local }} # If you want to train on your local runner, set this to True.
 
