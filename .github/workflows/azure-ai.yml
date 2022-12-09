@@ -43,9 +43,9 @@ on:
         default: false
         required: true
       remove_deployment:
-        description: 'Check if we should remove/update the previous docker/kubernetis deployment of the API LOCALLY. (if this is not the first deployment)'
+        description: 'Check if we should remove/update the previous docker/kubernetis deployment of the API LOCALLY. (if this is not a cold start)'
         type: boolean
-        default: false
+        default: true
         required: true
       docker_deployment:
         description: 'Check if we should run the docker image of the API LOCALLY.'
@@ -97,9 +97,9 @@ on:
         default: false
         required: true
       remove_deployment:
-        description: 'Check if we should remove/update the previous docker/kubernetis deployment of the API LOCALLY. (if this is not the first deployment)'
+        description: 'Check if we should remove/update the previous docker/kubernetis deployment of the API LOCALLY. (if this is not a cold start)'
         type: boolean
-        default: false
+        default: true
         required: true
       docker_deployment:
         description: 'Check if we should run the docker image of the API LOCALLY.'
@@ -109,7 +109,7 @@ on:
       kubernetis_deployment:
         description: 'Check if we should deploy the API on KUBERNETIS.'
         type: boolean
-        default: false
+        default: true
         required: true
     
 
@@ -382,7 +382,7 @@ jobs:
         run: |
           kubectl apply -f kubernetis/api-deployment.yml
       
-      - name: Set image based on the github SHA
+      - name: Restart the current cluster with the new image
         if: inputs.create_docker_image
         run: |
           kubectl rollout restart deployment malaria-classification-api-dpl

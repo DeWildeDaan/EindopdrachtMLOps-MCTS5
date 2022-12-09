@@ -8,14 +8,14 @@ jobs:
   start:
     uses: ./.github/workflows/azure-ai.yml
     with:
-      data_prep: true
-      process_images: true
-      ai_training: true
+      data_prep: false
+      process_images: false
+      ai_training: false
       train_on_local: false
-      api_creation: true
-      create_docker_image: true
+      api_creation: false
+      create_docker_image: false
       azure_deployment: false
-      remove_deployment: true
+      remove_deployment: false
       docker_deployment: false
-      kubernetis_deployment: true
+      kubernetis_deployment: false
     secrets: inherit
