@@ -80,8 +80,7 @@ def prepareEnvironment(ws):
     env = Environment(environment_name)
     env.python.conda_dependencies = CondaDependencies.create(
         # Using opencv-python-headless is interesting to skip the overhead of packages that we don't need in a headless-VM.
-        pip_packages=['azureml-dataset-runtime[pandas,fuse]', 'azureml-defaults',
-                      'tensorflow', 'scikit-learn', 'opencv-python-headless']
+        pip_packages=['azureml-dataset-runtime[pandas,fuse]', 'azureml-defaults', 'tensorflow', 'scikit-learn', 'opencv-python-headless']
     )
 
     # We can directly create an environment from a saved file
